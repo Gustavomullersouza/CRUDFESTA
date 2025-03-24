@@ -1,5 +1,8 @@
+val expressaoRegular = Regex("[0-4]")
+
 //Variavel Global
 var convidado: Convidado = Convidado()
+//Instancia de um lista mutavel vazia
 var listaConvidados : MutableList<Convidado> = mutableListOf()
 fun main() {
     menu()
@@ -17,33 +20,41 @@ private fun menu() {
                     "0- SAIR"
         )
 
-        opcao = readln().toInt()//Validar
+        opcao = readln().toInt()
 
-        when (opcao) {
-            1 -> {
-                println("Cadastrando...")
-                cadastrar()
-            }
+       if (expressaoRegular.matches(opcao)) {
+           when (opcao.toInt()) {
+               1 -> {
+                   println("Cadastrando...")
+                   cadastrar()
+               }
 
 
-            2 -> {
-                println("Listando...")
-                listar()
-            }
+               2 -> {
+                   println("Listando...")
+                   listar()
+               }
 
-            3 -> {
-                println("Editar...")
-                editar()
-            }
-            4 -> {
-                println("Excluindo...")
-                excluir()
-            }
-            0 -> println("Saindo...")
-            else -> println("Opção inválida. Tente novamente.")
+               3 -> {
+                   println("Editar...")
+                   editar()
+               }
+
+               4 -> {
+                   println("Excluindo...")
+                   excluir()
+               }
+
+               0 -> println("Saindo...")
+               else -> println("Opção inválida. Tente novamente.")
+           }
+       }else{
+            println("\n\n\nOpção inválida")
+
         }
     } while (opcao != 0)
 }
+
 
 private fun cadastrar() {
     //Instância
