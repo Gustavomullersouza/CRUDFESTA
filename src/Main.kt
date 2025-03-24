@@ -22,7 +22,7 @@ private fun menu() {
 
         opcao = readln().toInt()
 
-       if (expressaoRegular.matches(opcao)) {
+       if (expressaoRegular.matches(opcao.toString())) {
            when (opcao.toInt()) {
                1 -> {
                    println("Cadastrando...")
