@@ -1,9 +1,8 @@
-val expressaoRegular = Regex("[0-4]")
+val expressaoRegular = Regex("[0-5]")
 
 //Variavel Global
-var convidado: Convidado = Convidado()
 //Instancia de um lista mutavel vazia
-var listaConvidados : MutableList<Convidado> = mutableListOf()
+var listaConvidados : MutableList<Convidado> = mutableListOf<Convidado>()
 fun main() {
     menu()
 }
@@ -60,14 +59,15 @@ private fun menu() {
     } while (opcao != 0)
 }
 
-
+//Questão 1 -  Valida para que o usuario comente digite LETRAS
+//para escrever o nome
 private fun cadastrar() {
     //Instância
     val convidado = Convidado()
 
     println("Qual é o seu nome?")
     //val nome = readln()
-    convidado.nome = readln()
+    convidado.nome = readln()//Questão 1
 
     println("Qual vai ser o presente?")
     //val presente = readln()
@@ -80,12 +80,11 @@ private fun cadastrar() {
     listaConvidados.add(convidado)
 }
 
-private fun listar() {
+private fun listar(): String {
     var i = 0
-    if (listaConvidados.isEmpty()) {
-        println("Não há convidados")
-    }else {
+    if (validar()) {
         listaConvidados.forEach { convidado ->
+
             println(
                 "Posição: ${i++} " +
                         "Nome: ${convidado.nome}\n" +
@@ -93,46 +92,46 @@ private fun listar() {
                         "Restrição: ${convidado.alimento}\n" +
                         "Vai ir na festa: ${convidado.presenca}"
 
-            )
-        }
-    }
-}
-
+            )// FIM DO PRINT
+        } // FIM DO FOREACH
+    }//FIM DO IF
+    return "Listagem foi um sucesso"// esse é o meu retorna da função
+}//FIM DA FUNÇÃO LISTAR
+/* QUESTÃO 2 - Validar para que a variavel posição seja sempre numérica
+ e a variavel seja*/
 private fun editar(): Boolean{
-    if (listaConvidados.isEmpty()){
-        println("A lista está vazia")
-        return false
-    }
-    listar()
+    if (validar()){
+        listar()
 
-    println("Digite a posição a ser editada")
-    val posicao = readln().toInt()
+        println("Digite a posição a ser editada")
+        val posicao = readln().toInt()
 
-    println("O convidado vai? S/N")
-    val resposta = readln()
-    when (resposta) {
-        "S"->  listaConvidados[posicao].presenca = true
-        "N"->  listaConvidados[posicao].presenca = false
-
-    }
+        println("O convidado vai? S/N")
+        val resposta = readln()
+        when (resposta) {
+            "S" -> listaConvidados[posicao].presenca = true
+            "N" -> listaConvidados[posicao].presenca = false
+        }// FIM DO WHEN
+    }// FIM DO IF
     return true
-}
-
+}// FIM DO PRIVATE
+/* questão 3 - validAR PARA QUE A VARIAVEL POSIÇÃO SEJA SEMPRE NUMÉRICA*/
 private fun excluir(): Boolean{
     if (listaConvidados.isEmpty()){
-        println("A lista está vazia")
-        return false
-    }
-    listar()
+        listar()
 
-    println("Qual posição você deseja remover: ")
-    val posicao = readln().toInt()
-    listaConvidados.removeAt(posicao)
+        println("Qual posição você deseja remover: ")
+        val posicao = readln().toInt()
+        listaConvidados.removeAt(posicao)
 
-    print("Convidado exluido")
+        print("Convidado exluido")
+
+    }//FIM DO IF
     return true
-}
+}// FIM DO EXCLUIR
 
+/* QUESTÃO 4 - VALIDAR PARA QUE A VARIAVEL BUSCA SEJA SEMPRE
+* alfabetica, ignora letras maiusculas e minusculas */
 private fun busca(){
     var i = 0 // indice da lista
     println("Digite o nome da pessoa que você busca: ")
@@ -144,4 +143,12 @@ private fun busca(){
         }
         i++
     }
+}
+
+private fun validar() : Boolean{
+    if (listaConvidados.isEmpty()){
+        println("Lista vazia! Finalizando...")
+        return false
+    }
+    return true
 }
