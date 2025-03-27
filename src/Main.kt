@@ -17,6 +17,7 @@ private fun menu() {
                     "2- LISTAR\n" +
                     "3- EDITAR\n" +
                     "4- EXCLUIR\n" +
+                    "5- BUSCA\n" +
                     "0- SAIR"
         )
 
@@ -43,6 +44,10 @@ private fun menu() {
                4 -> {
                    println("Excluindo...")
                    excluir()
+               }
+               5 ->{
+                   println("Sair...")
+                   busca()
                }
 
                0 -> println("Saindo...")
@@ -126,4 +131,17 @@ private fun excluir(): Boolean{
 
     print("Convidado exluido")
     return true
+}
+
+private fun busca(){
+    var i = 0 // indice da lista
+    println("Digite o nome da pessoa que você busca: ")
+    val busca = readln()
+    listaConvidados.forEach{ convidado ->
+        // O contains busca por uma string dentro de um outra string
+        if (convidado.nome.contains(busca)){
+            println("posição: $i, nome: ${convidado.nome}")
+        }
+        i++
+    }
 }
